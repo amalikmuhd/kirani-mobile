@@ -1,0 +1,18 @@
+{
+  "onboarding": {
+    "title1": "Welcome to Kirani",
+    "description1": "Connect globally with your unique virtual number. Let's get started!",
+    "title2": "Get Your Unique Number",
+    "description2": "One number for all your international calls. Simple and convenient.",
+    "title3": "Easy and Affordable Calling",
+    "description3": "Enjoy seamless, low-cost international calls. Stay connected effortlessly."
+  },
+  "welcome": {
+    "title": "Login or Signup",
+    "enterEmail": "Enter your email address to get started",
+    "email": "Email address",
+    "description": "You can create an account by clicking the button below.",
+    "button": "Create account",
+    "next": "Next"
+  }
+}

@@ -4,15 +4,33 @@ export interface IUser {
   email: string;
   password?: string;
   phoneNumber?: string;
-  address?: string;
+  address?: IAddress;
   nin?: string;
   currency?: string;
   date?: Date;
 }
 
+export interface UserAccountResponse {}
+export type ICheckEmail = {
+  email: string;
+};
+export type ISignUp = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  password: string;
+};
+export interface ICheckPhone {
+  phone: string;
+}
+export interface ISignIn {
+  email: string;
+  password: string;
+}
+
 export interface IAddress {
   street: string;
-  city: string;
   state: string;
   country: string;
 }

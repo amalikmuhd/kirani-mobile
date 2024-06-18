@@ -1,0 +1,18 @@
+{
+  "onboarding": {
+    "title1": "Barka da zuwa Kirani",
+    "description1": "Haɗu da duniya tare da lambar ku ta musamman ta wucin gadi. Mu fara!",
+    "title2": "Samun Lambar Ka Ta Musamman",
+    "description2": "Lamba ɗaya don duk kira na ƙasa da ƙasa. Mai sauƙi da dacewa.",
+    "title3": "Kira Mai Sauƙi da Araha",
+    "description3": "Ji daɗin kira na ƙasa da ƙasa mai sauƙi da ƙarancin kudi. Kasance tare ba tare da wahala ba."
+  },
+  "welcome": {
+    "title": "Shiga ko Yi Rijista",
+    "enterEmail": "Shigar da adireshin imel ɗinka don fara",
+    "email": "Adireshin imel",
+    "description": "Kuna iya ƙirƙirar asusu ta danna maɓallin da ke ƙasa.",
+    "button": "Ƙirƙiri asusu",
+    "next": "Na gaba"
+  }
+}

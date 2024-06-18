@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { IOtp, IUser } from "../types";
+import { IOtp, ISignIn, IUser } from "../types";
 
 export const validation = {
   checkEmail: Joi.object({
@@ -7,6 +7,61 @@ export const validation = {
       .email({ tlds: false })
       .label("email")
       .messages({ "string.empty": "Email is required.", "string.email": "Email must be a valid email." })
+      .required(),
+  }),
+
+  checkSignup: Joi.object({
+    firstName: Joi.string()
+      .pattern(/^[a-zA-Z]+$/, "alphabet characters")
+      .min(2)
+      .label("firstName")
+      .max(30)
+      .required()
+      .messages({
+        "string.pattern.name": "First name must only contain alphabet characters",
+        "string.min": "First name must be at least 2 characters long",
+        "string.max": "First name must be less than or equal to 30 characters long",
+        "any.required": "First name is required",
+      })
+      .required(),
+
+    lastName: Joi.string()
+      .pattern(/^[a-zA-Z]+$/, "alphabet characters")
+      .min(2)
+      .label("lastName")
+      .max(30)
+      .required()
+      .messages({
+        "string.pattern.name": "Last name must only contain alphabet characters",
+        "string.min": "Last name must be at least 2 characters long",
+        "string.max": "Last name must be less than or equal to 30 characters long",
+        "any.required": "Last name is required",
+      })
+      .required(),
+
+    phoneNumber: Joi.string()
+      .pattern(/^(\+?234|0)[789][01]\d{8}$/, "Nigeria phone number")
+      .label("phoneNumber")
+      .required()
+      .messages({
+        "string.pattern.name": "Phone number must be a valid Nigerian phone number",
+        "string.base": "Phone number must be a string",
+        "string.empty": "Phone number is required",
+        "any.required": "Phone number is required",
+      })
+      .required(),
+
+    password: Joi.string()
+      .pattern(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"))
+      .label("password")
+      .required()
+      .messages({
+        "string.pattern.name":
+          "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+        "string.base": "Password must be a string",
+        "string.empty": "Password is required",
+        "any.required": "Password is required",
+      })
       .required(),
   }),
 
@@ -20,12 +75,46 @@ export const validation = {
       .validate(phoneNumber);
   },
 
-  signIn: (signin: IUser) => {
-    return Joi.object({
-      email: Joi.string().email().required(),
-      password: Joi.string().min(8).required(),
-    }).validate(signin);
-  },
+  checkSignIn: Joi.object({
+    email: Joi.string()
+      .email({ tlds: false })
+      .label("email")
+      .messages({ "string.empty": "Email is required.", "string.email": "Email must be a valid email." })
+      .required(),
+    password: Joi.string().label("password").min(5).required(),
+  }),
+
+  checkOtp: Joi.object({
+    otp: Joi.string()
+      .pattern(/^\d{6}$/, "numeric")
+      .label("otp")
+      .required()
+      .messages({
+        "string.pattern.name": "OTP must be a 6-digit number",
+        "string.base": "OTP must be a string",
+        "string.empty": "OTP is required",
+        "any.required": "OTP is required",
+      }),
+  }),
+
+  checkPasswords: Joi.object({
+    password: Joi.string()
+      .pattern(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"))
+      .label("password")
+      .required()
+      .messages({
+        "string.pattern.name":
+          "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+        "string.base": "Password must be a string",
+        "string.empty": "Password is required",
+        "any.required": "Password is required",
+      }),
+
+    confirmPassword: Joi.any().equal(Joi.ref("password")).required().label("confirmPassword").messages({
+      "any.only": "Confirm password does not match password",
+      "any.required": "Confirm password is required",
+    }),
+  }),
 
   signup: (signup: IUser) => {
     return Joi.object({
