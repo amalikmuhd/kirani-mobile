@@ -1,21 +1,24 @@
-import AnimatedSplashScreen from "@/components/shared/AnimatedSplashScreen";
-// import { getUserScreen } from "@/services/endpoint";
-import { load } from "@/utils/storage";
-import { router } from "expo-router";
 import React from "react";
+import { router } from "expo-router";
+import { load } from "@/utils/storage";
+import AnimatedSplashScreen from "@/components/shared/AnimatedSplashScreen";
 
 export default function SplashScreen() {
-  const [loading, setLoading] = React.useState(true);
-
   const loadScreens = async () => {
     try {
-      const { token, id } = await load("KiraniStorage");
-      setLoading(false);
+      const token = await load("token");
+      // if token exist take user to dashboard
+      if (token.token) {
+        router.push("/(tabs)/");
+      } else if (token.isLogged) {
+        // user signout take user to signin
+        router.push("/(auth)/signin");
+      }
     } catch (error) {
+      // first time user
       setTimeout(() => {
         router.push("/onboarding");
-        // setLoading(false);
-      }, 2000);
+      }, 1000);
     }
   };
 
